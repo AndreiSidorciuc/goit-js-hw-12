@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,12 +8,22 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <load src="./partials/header.html" icon-path="img/sprite.svg#logo" />
+    <!-- <load src="./partials/header.html" icon-path="img/sprite.svg#logo" /> -->
 
     <main>
       <!-- Loads the specified .html file -->
-      <load src="./partials/vite-promo.html" />
-      <load src="./partials/badges.html" />
+      <form class="search-form">
+        <input type="text" name="searchText" placeholder="Search images..." />
+        <button type="submit">Search</button>
+      </form>
+
+      <ul class="gallery"></ul>
+
+      <button class="load-more hidden">Load more</button>
+
+      <div class="loader hidden"></div>
+
+      <script type="module" src="./main.js"></script>
     </main>
 
     <load src="./partials/footer.html" />
