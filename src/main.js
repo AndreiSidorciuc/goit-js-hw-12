@@ -77,13 +77,15 @@ async function onSearch(event) {
 }
 
 async function onLoadMore() {
-  currentPage += 1;
+  const nextPage = currentPage + 1;
 
   hideLoadMoreButton();
   showLoader();
 
   try {
-    const data = await getImagesByQuery(currentQuery, currentPage);
+    const data = await getImagesByQuery(currentQuery, nextPage);
+
+    currentPage = nextPage;
 
     createGallery(data.hits);
 
@@ -104,16 +106,22 @@ async function onLoadMore() {
       message: 'Something went wrong!',
       position: 'topRight',
     });
+
+    showLoadMoreButton();
   } finally {
     hideLoader();
   }
 }
 
 function smoothScroll() {
-  const card = document.querySelector('.gallery-item').getBoundingClientRect();
+  const card = document.querySelector('.gallery-item');
+
+  if (!card) return;
+
+  const cardHeight = card.getBoundingClientRect().height;
 
   window.scrollBy({
-    top: card.height * 2,
+    top: cardHeight * 2,
     behavior: 'smooth',
   });
 }
